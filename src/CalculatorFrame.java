@@ -124,11 +124,20 @@ public class CalculatorFrame extends JFrame
         panel1.add(secondBox); 
         panel1.add(equalsSign);
         panel1.add(computeResult);
-        // TODO: add the operations to the lower panel
-        // TODO: add the slider to panel0
-
-        // TODO: add the panels into the frame. Remember that this class is a JFrame, so you should simply call
-        // the add method of this object that is being constructed.
+        panel2.add(errorMessage);
+        panel3.add(button);
+        panel4.add(add);
+        panel4.add(multiply);
+        panel4.add(divide);
+        panel4.add(equality);
+        panel0.add(slider);
+        
+        this.add(panel0);
+        this.add(panel1);
+        this.add(panel2);
+        this.add(panel3);
+        this.add(panel4);
+        
 
         //default to + operator
         add.setSelected(true);  //remember, the button group ensures only one button is selected
@@ -153,17 +162,37 @@ public class CalculatorFrame extends JFrame
          */
         add.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	// TODO: change the opSign, clear the error message and compute result.
+            	
+               errorMessage.setText("");
+            	computeResult.setText("");
+            	opSign.setText("+  ");
+            	
             } 
         });
         
         multiply.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	// TODO: change the opSign, clear the error message and compute result.
+               errorMessage.setText("");
+               computeResult.setText("");
+               opSign.setText("*  ");
             }
         });
         
-        // TODO: implement the actionlisteners for the divide and equality buttons the same way:
+        divide.addActionListener(new ActionListener() {
+           public void actionPerformed(ActionEvent e) {
+              errorMessage.setText("");
+              computeResult.setText("");
+              opSign.setText("/  ");
+           }
+       });
+        
+        equality.addActionListener(new ActionListener() {
+           public void actionPerformed(ActionEvent e) {
+              errorMessage.setText("");
+              computeResult.setText("");
+              opSign.setText("==  ");
+           }
+       });
         
         /*
          * Set the Change Listener for the Slider. When a change
@@ -178,6 +207,10 @@ public class CalculatorFrame extends JFrame
         slider.addChangeListener(new ChangeListener() {
         	public void stateChanged(ChangeEvent e) {
         		// TODO: change the text in the first JTextField. Clear error and result
+        	   
+        	   errorMessage.setText("");
+        	   computeResult.setText("");
+        	   firstBox.setText("" + slider.getValue());
             }
         });
 
