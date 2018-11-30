@@ -19,8 +19,8 @@ import javax.swing.event.ChangeListener;
  * 
  * This class creates a GUI for simple calculator application
  * 
- * @author CS2334. Modified by: Stephen
- * @version 2018-11-28
+ * @author Elijah Boulton, based on code by CS2334. Modified by: Stephen
+ * @version 2018-11-29
  */
 public class CalculatorFrame extends JFrame
 {
@@ -206,11 +206,11 @@ public class CalculatorFrame extends JFrame
          */
         slider.addChangeListener(new ChangeListener() {
         	public void stateChanged(ChangeEvent e) {
-        		// TODO: change the text in the first JTextField. Clear error and result
         	   
         	   errorMessage.setText("");
         	   computeResult.setText("");
         	   firstBox.setText("" + slider.getValue());
+        	   
             }
         });
 
@@ -250,19 +250,46 @@ public class CalculatorFrame extends JFrame
                     
                     // Clear the error message text field:
                     errorMessage.setText("");
+                    
+                    if(opSign.getText().equals("+  "))
+                    {
+                       int first = slider.getValue();
+                       int second = Integer.parseInt(secondBox.getText());
+                       int result = first + second;
+                       computeResult.setText("" + result);
+                    }
+                    else if(opSign.getText().equals("*  "))
+                    {
+                       int first = slider.getValue();
+                       int second = Integer.parseInt(secondBox.getText());
+                       int result = first * second;
+                       computeResult.setText("" + result);
+                    }
+                    else if(opSign.getText().equals("/  "))
+                    {
+                       int first = slider.getValue();
+                       int second = Integer.parseInt(secondBox.getText());
+                       int result = first / second;
+                       computeResult.setText("" + result);
+                    }
+                    else
+                    {
+                       int first = slider.getValue();
+                       int second = Integer.parseInt(secondBox.getText());
+                       boolean result = first == second;
+                       computeResult.setText("" + result);
+                    }
                 }
                 // Check for errors:
                 // (1) A number entered is not an integer -> NumberFormatException
                 // (2) Divide by zero -> ArithmeticException
                 catch (NumberFormatException error) {
-                	// TODO: display the error message "ERROR: Please enter a valid integer."
-                    // in the error message text field.
-                	// TODO: Clear computeResult
+                	errorMessage.setText("ERROR: Please enter a valid integer.");
+                	computeResult.setText("");
                 }
                 catch (ArithmeticException error) {
-                	// TODO: display the error message "ERROR: Tried to divide by 0."
-                    // in the error message text field.
-                	// TODO: Clear computeResult
+                	errorMessage.setText("ERROR: Tried to divide by 0.");
+                	computeResult.setText("");
                 }
             }
         });
